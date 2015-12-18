@@ -1,7 +1,8 @@
 {
     "name": "tystr/react-js-bundle",
-    "description": "A bundle for integrating reactjs into symfony. Provides server-side rendering via the v8js php extension for isomorphic afor isomorphic apps.",
-    "type": "bundle",
+    "description": "A bundle for integrating reactjs into symfony. Provides server-side rendering via the v8js php extension for isomorphic apps.",
+    "keywords": ["react", "reactjs", "react.js", "bundle", "symfony", "isomorphic", "php", "v8js"],
+    "type": "symfony-bundle",
     "require": {
         "reactjs/react-php-v8js": "^1.0",
         "twig/twig": "^1.23"
