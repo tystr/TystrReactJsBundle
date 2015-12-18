@@ -1,0 +1,28 @@
+language: php
+
+php:
+  - 5.4
+  - 5.5
+  - 5.6
+  - 7.0
+  - hhvm
+  - nightly
+
+before_script:
+  - sudo apt-get install ruby-full
+  - sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main universe restricted multiverse"
+  - sudo apt-get update
+  - sudo apt-cache search libv8
+  - sudo apt-get install libv8-dev
+  - echo '' | pecl install v8js
+  - composer install -n
+  - composer require codeclimate/php-test-reporter:dev-master@dev
+
+script: ./vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+
+after_script:
+  - ./vendor/bin/test-reporter
+
+addons:
+  code_climate:
+    repo_token: aa0ad43580b580164adf80c8aee4d47e6e313b47db549e5ecb6abd62447b412c

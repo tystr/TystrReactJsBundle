@@ -19,13 +19,13 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('tystr_react_js');
 
         $rootNode->children()
-            ->scalarNode('reactjs_path')
+            ->scalarNode('react_path')
                 ->isRequired()
                 ->info('The absolute path to the react.js library.')
             ->end()
-            ->scalarNode('javascripts_path')->isRequired()
+            ->scalarNode('components_path')->isRequired()
                 ->isRequired()
-                ->info('The absolute path to the combined react components js.')
+                ->info('The absolute path to the combined react components javascript file.')
             ->end();
 
         return $treeBuilder;

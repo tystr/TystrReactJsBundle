@@ -6,8 +6,8 @@
 
     <services>
         <service id="tystr_react_js.v8js.factory" class="Tystr\ReactJsBundle\ReactJsFactory">
-            <argument>%reactjs_path%</argument>
-            <argument>%javascripts_path%</argument>
+            <argument>%react_path%</argument>
+            <argument>%components_path%</argument>
         </service>
         <service id="tystr_react_js.v8js" class="ReactJS">
             <factory service="tystr_react_js.v8js.factory" method="createReactJs"/>

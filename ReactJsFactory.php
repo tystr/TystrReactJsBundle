@@ -12,21 +12,21 @@ class ReactJsFactory
     /**
      * @var string
      */
-    private $reactJsSource;
+    private $reactPath;
 
     /**
      * @var string
      */
-    private $javascriptsSource;
+    private $componentsPath;
 
     /**
-     * @param string $reactJsSource
-     * @param string $javascriptsSource
+     * @param string $reactPath
+     * @param string $componentsPath
      */
-    public function __construct($reactJsSource, $javascriptsSource)
+    public function __construct($reactPath, $componentsPath)
     {
-        $this->reactJsSource = $reactJsSource;
-        $this->javascriptsSource = $javascriptsSource;
+        $this->reactPath = $reactPath;
+        $this->componentsPath = $componentsPath;
     }
 
     /**
@@ -34,8 +34,8 @@ class ReactJsFactory
      */
     public function createReactJs()
     {
-        $react = file_get_contents($this->reactJsSource);
-        $js = file_get_contents($this->javascriptsSource);
+        $react = file_get_contents($this->reactPath);
+        $js = file_get_contents($this->componentsPath);
 
         return new ReactJS($react, $js);
     }
