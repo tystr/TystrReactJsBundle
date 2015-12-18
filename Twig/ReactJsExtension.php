@@ -51,6 +51,11 @@ class ReactJsExtension extends Twig_Extension
                 [$this, 'renderReactComponentsJs'],
                 ['is_safe' => ['html']]
             ),
+            'react_mount_component' => new Twig_SimpleFunction(
+                'react_mount_components',
+                [$this, 'renderReactComponentJs'],
+                ['is_safe' => ['html']]
+            ),
         ];
     }
 
@@ -63,6 +68,8 @@ class ReactJsExtension extends Twig_Extension
     }
 
     /**
+     * Render a react component's markup and store it's js for mounting later
+     *
      * @param string $componentName
      * @param string $containerId
      * @param mixed  $data
@@ -72,17 +79,33 @@ class ReactJsExtension extends Twig_Extension
     public function renderReactComponent($componentName, $containerId, $data = null)
     {
         $this->reactJS->setComponent($componentName, $data);
-        $this->componentsJs[] = $this->reactJS->getJS('document.getElementById(\''.$containerId.'\')');
+        $this->componentsJs[$componentName] = $this->reactJS->getJS('document.getElementById(\''.$containerId.'\')');
 
         return sprintf($this->getWrapper(), $containerId, $this->reactJS->getMarkup());
     }
 
     /**
+     * Mount all components
+     *
      * @return string
      */
     public function renderReactComponentsJs()
     {
         return implode("\n", $this->componentsJs);
+    }
+
+    /**
+     * Mount a single react component
+     *
+     * @param string $componentName
+     */
+    public function renderReactComponentJs($componentName)
+    {
+        if (!isset($this->componentsJs[$componentName])) {
+            throw new \Exception();
+        }
+
+        return $this->componentsJs[$componentName];
     }
 
     /**

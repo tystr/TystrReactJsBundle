@@ -64,4 +64,23 @@ class ReactJsExtensionTest extends PHPUnit_Framework_TestCase
         $js = $this->extension->renderReactComponentsJs();
         $this->assertEquals("js1;\njs2;", $js);
     }
+
+    public function testRenderSingleReactComponentJs()
+    {
+        $this->react->expects($this->exactly(2))
+            ->method('setComponent');
+
+        $this->react->expects($this->exactly(2))
+            ->method('getJS')
+            ->will($this->onConsecutiveCalls('js1;', 'js2;'));
+
+        $this->react->expects($this->exactly(2))
+            ->method('getMarkup');
+
+        $this->extension->renderReactComponent('MyComponent1', 'my-component1');
+        $this->extension->renderReactComponent('MyComponent2', 'my-component2');
+
+        $js = $this->extension->renderReactComponentJs('MyComponent2');
+        $this->assertEquals("js2;", $js);
+    }
 }
