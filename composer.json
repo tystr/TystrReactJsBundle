@@ -1,0 +1,23 @@
+{
+    "name": "tystr/react-js-bundle",
+    "description": "A bundle for integrating reactjs into symfony. Provides server-side rendering via the v8js php extension for isomorphic afor isomorphic apps.",
+    "type": "bundle",
+    "require": {
+        "reactjs/react-php-v8js": "^1.0",
+        "twig/twig": "^1.23"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.1"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tyler Stroud",
+            "email": "tyler@tylerstroud.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": { "Tystr\\ReactJsBundle\\": "" }
+    }
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="tystr_react_js.v8js.factory" class="Tystr\ReactJsBundle\ReactJsFactory">
+            <argument>%reactjs_path%</argument>
+            <argument>%javascripts_path%</argument>
+        </service>
+        <service id="tystr_react_js.v8js" class="ReactJS">
+            <factory service="tystr_react_js.v8js.factory" method="createReactJs"/>
+        </service>
+
+        <service id="tystr_react_js.twig.reactjs" class="Tystr\ReactJsBundle\Twig\ReactJsExtension">
+            <tag name="twig.extension"/>
+            <argument type="service" id="tystr_react_js.v8js"/>
+        </service>
+    </services>
+</container>
