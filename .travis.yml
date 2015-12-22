@@ -5,14 +5,13 @@ php:
   - 5.6
 
 before_script:
-  - sudo apt-get update
-  - sudo apt-get install libv8-dev
   - git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
   - export PATH=`pwd`/depot_tools:"$PATH"
   - fetch v8
   - gclient sync
-  - cd v8 && make native
+  - cd v8 && make native library=shared -j2
   - echo "$TRAVIS_BUILD_DIR/v8" | pecl install v8js
+  - cd $TRAVIS_BUILD_DIR
   - composer install -n
 
 script: ./vendor/bin/phpunit # --coverage-clover build/logs/clover.xml
