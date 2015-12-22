@@ -8,9 +8,14 @@ before_script:
   - git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
   - export PATH=`pwd`/depot_tools:"$PATH"
   - fetch v8
+  - cd v8
   - gclient sync
-  - cd v8 && make native library=shared snapshot=off -j2
-  - echo "$TRAVIS_BUILD_DIR/v8" | pecl install v8js
+  - make native library=shared snapshot=off -j4
+  - sudo mkdir -p /usr/lib /usr/include
+  - sudo cp out/native/lib.target/lib*.so /usr/lib/
+  - sudo cp -R include/* /usr/include
+  - echo -e "create /usr/lib/libv8_libplatform.a\naddlib out/native/obj.target/tools/gyp/libv8_libplatform.a\nsave\nend" | sudo ar -M
+  - echo "\n" | pecl install v8js
   - cd $TRAVIS_BUILD_DIR
   - composer install -n
 
