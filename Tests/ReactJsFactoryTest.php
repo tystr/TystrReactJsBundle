@@ -17,7 +17,7 @@ class ReactJsFactoryTest extends PHPUnit_Framework_TestCase
 
         $factory = new ReactJsFactory($reactPath, $componentsPath);
         $reactJS = $factory->createReactJs();
-        $this->assertInstanceOf('ReactJs', $reactJS);
+        $this->assertInstanceOf('ReactJS', $reactJS);
     }
 
     /**
@@ -31,7 +31,7 @@ class ReactJsFactoryTest extends PHPUnit_Framework_TestCase
 
         $factory = new ReactJsFactory($reactPath, $componentsPath);
         $reactJS = $factory->createReactJs();
-        $this->assertInstanceOf('ReactJs', $reactJS);
+        $this->assertInstanceOf('ReactJS', $reactJS);
     }
 
     /**
@@ -45,6 +45,6 @@ class ReactJsFactoryTest extends PHPUnit_Framework_TestCase
 
         $factory = new ReactJsFactory($reactPath, $componentsPath);
         $reactJS = $factory->createReactJs();
-        $this->assertInstanceOf('ReactJs', $reactJS);
+        $this->assertInstanceOf('ReactJS', $reactJS);
     }
 }
