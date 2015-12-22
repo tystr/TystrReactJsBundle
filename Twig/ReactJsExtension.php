@@ -103,7 +103,9 @@ class ReactJsExtension extends Twig_Extension
     public function renderReactComponentJs($componentName)
     {
         if (!isset($this->componentsJs[$componentName])) {
-            throw new \Exception();
+            throw new ComponentNotRenderedException(
+                'You must render a component before it can be mounted.'
+            );
         }
 
         return $this->componentsJs[$componentName];
