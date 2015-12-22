@@ -1,4 +1,7 @@
 # TystrReactJsBundle
+[![Build Status](https://travis-ci.org/tystr/TystrReactJsBundle.svg?branch=master)](https://travis-ci.org/tystr/TystrReactJsBundle)
+[![Code Climate](https://codeclimate.com/github/tystr/TystrReactJsBundle/badges/gpa.svg)](https://codeclimate.com/github/tystr/TystrReactJsBundle)
+[![Test Coverage](https://codeclimate.com/github/tystr/TystrReactJsBundle/badges/coverage.svg)](https://codeclimate.com/github/tystr/TystrReactJsBundle/coverage)
 
 A bundle for integrating [React][0] into [Symfony][1]. Provides server-side
 rendering via the [v8js PHP extension][2] for isomorphic app.
