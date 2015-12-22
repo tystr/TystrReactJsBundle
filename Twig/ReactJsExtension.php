@@ -5,6 +5,7 @@ namespace Tystr\ReactJsBundle\Twig;
 use Twig_Extension;
 use ReactJS;
 use Twig_SimpleFunction;
+use Tystr\ReactJsBundle\Exception\ComponentNotRenderedException;
 
 /**
  * @author Tyler Stroud <tyler@tylerstroud.com>
@@ -52,7 +53,7 @@ class ReactJsExtension extends Twig_Extension
                 ['is_safe' => ['html']]
             ),
             'react_mount_component' => new Twig_SimpleFunction(
-                'react_mount_components',
+                'react_mount_component',
                 [$this, 'renderReactComponentJs'],
                 ['is_safe' => ['html']]
             ),
