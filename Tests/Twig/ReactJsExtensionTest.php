@@ -20,6 +20,11 @@ class ReactJsExtensionTest extends PHPUnit_Framework_TestCase
         $this->extension = new ReactJsExtension($this->react);
     }
 
+    public function testGetName()
+    {
+        $this->assertEquals('reactjs', $this->extension->getName());
+    }
+
     public function testGetFunctions()
     {
         $functions = $this->extension->getFunctions();
