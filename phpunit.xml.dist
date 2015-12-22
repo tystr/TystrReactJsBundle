@@ -3,13 +3,13 @@
 <phpunit colors="true" bootstrap="Tests/bootstrap.php">
     <testsuites>
         <testsuite name="Test suite for TystrReactJsBundle">
-            <directory>./Tests</directory>
+            <directory suffix="Test.php">./Tests</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
-            <directory>.</directory>
+            <directory suffix=".php">./</directory>
             <exclude>
                 <directory>./Tests</directory>
                 <directory>./Resources</directory>
