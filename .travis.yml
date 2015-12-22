@@ -7,7 +7,12 @@ php:
 before_script:
   - sudo apt-get update
   - sudo apt-get install libv8-dev
-  - echo '' | pecl install v8js-0.1.3
+  - git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+  - export PATH=`pwd`/depot_tools:"$PATH"
+  - fetch v8
+  - gclient sync
+  - cd v8 && make native
+  - echo "$TRAVIS_BUILD_DIR/v8" | pecl install v8js
   - composer install -n
 
 script: ./vendor/bin/phpunit # --coverage-clover build/logs/clover.xml
