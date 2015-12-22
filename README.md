@@ -52,6 +52,13 @@ tystr_react_js:
 This will render the react component `MyComponent` on the server-side and place
 it inside a div with the id `my-component`.
 
+To pass data to a component, pass a hash as the third argument:
+
+```twig
+{{ react_component('MyComponent', 'my-component', {'name': 'Tyler'}) }}
+```
+This makes `this.props.name` available in `MyComponent`.
+
 To mount all components rendered with the `react_component` function, use the
 `react_mount_components` twig function:
 
