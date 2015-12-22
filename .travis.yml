@@ -9,7 +9,7 @@ before_script:
   - export PATH=`pwd`/depot_tools:"$PATH"
   - fetch v8
   - gclient sync
-  - cd v8 && make native library=shared -j2
+  - cd v8 && make native library=shared snapshot=off -j2
   - echo "$TRAVIS_BUILD_DIR/v8" | pecl install v8js
   - cd $TRAVIS_BUILD_DIR
   - composer install -n
