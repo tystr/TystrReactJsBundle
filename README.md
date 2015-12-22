@@ -76,3 +76,5 @@ To mount a single react component (as long as it's already rendered with
     {{ react_mount_component('MyComponent') }}
 </script>
 ```
+Attempting to mount a component whose markup has not been rendered will result
+in an exception `Tystr\ReactJsBundle\Exception\ComponentNotRenderedException`.
