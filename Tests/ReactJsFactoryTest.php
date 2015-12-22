@@ -10,17 +10,41 @@ use Tystr\ReactJsBundle\ReactJsFactory;
  */
 class ReactJsFactoryTest extends PHPUnit_Framework_TestCase
 {
-    protected $factory;
-    public function setUp()
+    public function testCreateJs()
     {
         $reactPath = __DIR__.'/react.min.js';
         $componentsPath = __DIR__.'/components.js';
-        $this->factory = new ReactJsFactory($reactPath, $componentsPath);
+
+        $factory = new ReactJsFactory($reactPath, $componentsPath);
+        $reactJS = $factory->createReactJs();
+        $this->assertInstanceOf('ReactJs', $reactJS);
     }
 
-    public function testCreateJs()
+    /**
+     * @expectedException Tystr\ReactJsBundle\Exception\FileNotReadableException
+     * @expectedExceptionMessage React path "/Users/tylerstroud/PhpstormProjects/reactjs-bundle/sandbox/src/Tystr/ReactJsBundle/Tests/invalid_react_path" is not readable.
+     */
+    public function testCreateJsThrowsExceptionWhenReactPathIsNotReadable()
     {
-        $reactJS = $this->factory->createReactJs();
+        $reactPath = __DIR__.'/invalid_react_path';
+        $componentsPath = __DIR__.'/components.js';
+
+        $factory = new ReactJsFactory($reactPath, $componentsPath);
+        $reactJS = $factory->createReactJs();
+        $this->assertInstanceOf('ReactJs', $reactJS);
+    }
+
+    /**
+     * @expectedException Tystr\ReactJsBundle\Exception\FileNotReadableException
+     * @expectedExceptionMessage Components path "/Users/tylerstroud/PhpstormProjects/reactjs-bundle/sandbox/src/Tystr/ReactJsBundle/Tests/invalid_component_path" is not readable.
+     */
+    public function testCreateJsThrowsExceptionWhenComponentsPathIsNotReadable()
+    {
+        $reactPath = __DIR__.'/react.min.js';
+        $componentsPath = __DIR__.'/invalid_component_path';
+
+        $factory = new ReactJsFactory($reactPath, $componentsPath);
+        $reactJS = $factory->createReactJs();
         $this->assertInstanceOf('ReactJs', $reactJS);
     }
 }
