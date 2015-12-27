@@ -26,7 +26,13 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('components_path')->isRequired()
                 ->isRequired()
                 ->info('The absolute path to the combined react components javascript file.')
-            ->end();
+            ->end()
+            ->enumNode('render_method')
+                ->values(['v8js', 'external'])
+                ->defaultValue('v8js')
+                ->info('The absolute path to the combined react components javascript file.')
+            ->end()
+            ->scalarNode('render_url')->end();
 
         return $treeBuilder;
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tystr\ReactJsBundle;
+namespace Tystr\ReactJsBundle\Renderer;
 
 use ReactJS;
 use Tystr\ReactJsBundle\Exception\FileNotReadableException;

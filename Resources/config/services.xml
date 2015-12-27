@@ -5,17 +5,29 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="tystr_react_js.v8js.factory" class="Tystr\ReactJsBundle\ReactJsFactory">
-            <argument>%react_path%</argument>
-            <argument>%components_path%</argument>
+        <service id="tystr_react_js.v8js.factory" class="Tystr\ReactJsBundle\Renderer\ReactJsFactory">
+            <argument>%tystr_react_js.react_path%</argument>
+            <argument>%tystr_react_js.components_path%</argument>
         </service>
         <service id="tystr_react_js.v8js" class="ReactJS">
             <factory service="tystr_react_js.v8js.factory" method="createReactJs"/>
         </service>
 
+        <!-- Adapters -->
+        <service id="tystr_react_js.renderer.external_adapter" class="Tystr\ReactJsBundle\Renderer\ExternalAdapter">
+            <argument/><!-- Set dynamically -->
+        </service>
+        <service id="tystr_react_js.renderer.v8js_adapter" class="Tystr\ReactJsBundle\Renderer\V8jsAdapter">
+            <argument type="service" id="tystr_react_js.v8js"/>
+        </service>
+
+        <service id="tystr_react_js.renderer" class="Tystr\ReactJsBundle\Renderer\ReactRenderer">
+            <argument/><!-- Set dynamically -->
+        </service>
+
         <service id="tystr_react_js.twig.reactjs" class="Tystr\ReactJsBundle\Twig\ReactJsExtension">
             <tag name="twig.extension"/>
-            <argument type="service" id="tystr_react_js.v8js"/>
+            <argument type="service" id="tystr_react_js.renderer"/>
         </service>
     </services>
 </container>

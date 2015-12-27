@@ -45,6 +45,26 @@ tystr_react_js:
     components_path: path/to/components.js
 ```
 
+By default, the [v8js PHP extension][2] is used to render the react components.
+If you would prefer to use an external server to render the react components,
+you may configure an external rendering method:
+
+```YAML
+# app/config.yml
+
+tystr_react_js:
+    react_path: path/to/react.js
+    components_path: path/to/components.js
+    render_method: external
+    render_url: http://localhost:3000
+```
+
+This will cause a `GET` request to be made to the `render_url` value with the
+component and data (`{name: Tyler}` in this case) in the url as query parameters:
+
+    GET http://localhost:3000?component=MyComponent&data=%7B%22name%22%3A%22Tyler%22%7D
+
+
 # Usage
 
 ```twig

@@ -1,9 +1,9 @@
 <?php
 
-namespace Tystr\ReactJsBundle\Tests;
+namespace Tystr\ReactJsBundle\Tests\Renderer;
 
 use PHPUnit_Framework_TestCase;
-use Tystr\ReactJsBundle\ReactJsFactory;
+use Tystr\ReactJsBundle\Renderer\ReactJsFactory;
 
 /**
  * @author Tyler Stroud <tyler@tylerstroud.com>
@@ -29,7 +29,8 @@ class ReactJsFactoryTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException Tystr\ReactJsBundle\Exception\FileNotReadableException
-     * @expectedExceptionMessage React path "/Users/tylerstroud/PhpstormProjects/reactjs-bundle/sandbox/src/Tystr/ReactJsBundle/Tests/invalid_react_path" is not readable.
+     * @expectedExceptionMessage React path "/Users/tylerstroud/PhpstormProjects/reactjs-bundle/sandbox/src/Tystr/ReactJsBundle/Tests/Renderer/invalid_react_path" is not readable.
+     *
      */
     public function testCreateJsThrowsExceptionWhenReactPathIsNotReadable()
     {
@@ -43,7 +44,7 @@ class ReactJsFactoryTest extends PHPUnit_Framework_TestCase
 
     /**
      * @expectedException Tystr\ReactJsBundle\Exception\FileNotReadableException
-     * @expectedExceptionMessage Components path "/Users/tylerstroud/PhpstormProjects/reactjs-bundle/sandbox/src/Tystr/ReactJsBundle/Tests/invalid_component_path" is not readable.
+     * @expectedExceptionMessage Components path "/Users/tylerstroud/PhpstormProjects/reactjs-bundle/sandbox/src/Tystr/ReactJsBundle/Tests/Renderer/invalid_component_path" is not readable.
      */
     public function testCreateJsThrowsExceptionWhenComponentsPathIsNotReadable()
     {

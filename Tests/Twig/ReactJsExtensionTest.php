@@ -11,13 +11,15 @@ use Twig_Node;
  */
 class ReactJsExtensionTest extends PHPUnit_Framework_TestCase
 {
-    private $react;
+    private $renderer;
     private $extension;
 
     public function setUp()
     {
-        $this->react = $this->getMockBuilder('ReactJS')->disableOriginalConstructor()->getMock();
-        $this->extension = new ReactJsExtension($this->react);
+        $this->renderer = $this->getMockBuilder('Tystr\ReactJsBundle\Renderer\ReactRenderer')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->extension = new ReactJsExtension($this->renderer);
     }
 
     public function testGetName()
@@ -51,16 +53,10 @@ class ReactJsExtensionTest extends PHPUnit_Framework_TestCase
 
     public function testReactComponent()
     {
-        $this->react->expects($this->once())
-            ->method('setComponent')
-            ->with('MyComponent', null);
-
-        $this->react->expects($this->once())
-            ->method('getJS');
-
-        $this->react->expects($this->once())
-            ->method('getMarkup')
-            ->will($this->returnValue('MARKUP'));
+        $this->renderer->expects($this->once())
+            ->method('render')
+            ->with('MyComponent')
+            ->willReturn('MARKUP');
 
         $renderedComponent = $this->extension->renderReactComponent('MyComponent', 'my-component');
 
@@ -69,15 +65,12 @@ class ReactJsExtensionTest extends PHPUnit_Framework_TestCase
 
     public function testRenderReactComponentJs()
     {
-        $this->react->expects($this->exactly(2))
-            ->method('setComponent');
+        $this->renderer->expects($this->exactly(2))
+            ->method('render');
 
-        $this->react->expects($this->exactly(2))
-            ->method('getJS')
+        $this->renderer->expects($this->exactly(2))
+            ->method('getRenderJs')
             ->will($this->onConsecutiveCalls('js1;', 'js2;'));
-
-        $this->react->expects($this->exactly(2))
-            ->method('getMarkup');
 
         $this->extension->renderReactComponent('MyComponent1', 'my-component1');
         $this->extension->renderReactComponent('MyComponent2', 'my-component2');
@@ -88,15 +81,12 @@ class ReactJsExtensionTest extends PHPUnit_Framework_TestCase
 
     public function testRenderSingleReactComponentJs()
     {
-        $this->react->expects($this->exactly(2))
-            ->method('setComponent');
+        $this->renderer->expects($this->exactly(2))
+            ->method('render');
 
-        $this->react->expects($this->exactly(2))
-            ->method('getJS')
+        $this->renderer->expects($this->exactly(2))
+            ->method('getRenderJs')
             ->will($this->onConsecutiveCalls('js1;', 'js2;'));
-
-        $this->react->expects($this->exactly(2))
-            ->method('getMarkup');
 
         $this->extension->renderReactComponent('MyComponent1', 'my-component1');
         $this->extension->renderReactComponent('MyComponent2', 'my-component2');

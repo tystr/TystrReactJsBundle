@@ -3,9 +3,9 @@
 namespace Tystr\ReactJsBundle\Twig;
 
 use Twig_Extension;
-use ReactJS;
 use Twig_SimpleFunction;
 use Tystr\ReactJsBundle\Exception\ComponentNotRenderedException;
+use Tystr\ReactJsBundle\Renderer\ReactRenderer;
 
 /**
  * @author Tyler Stroud <tyler@tylerstroud.com>
@@ -13,9 +13,9 @@ use Tystr\ReactJsBundle\Exception\ComponentNotRenderedException;
 class ReactJsExtension extends Twig_Extension
 {
     /**
-     * @var ReactJS
+     * @var ReactRenderer
      */
-    private $reactJS;
+    private $renderer;
 
     /**
      * @var string
@@ -28,11 +28,12 @@ class ReactJsExtension extends Twig_Extension
     private $componentsJs = [];
 
     /**
-     * @param ReactJS $reactJS
+     * @param ReactRenderer $renderer
+     * @param string        $wrapperTag
      */
-    public function __construct(ReactJS $reactJS, $wrapperTag = 'div')
+    public function __construct(ReactRenderer $renderer, $wrapperTag = 'div')
     {
-        $this->reactJS = $reactJS;
+        $this->renderer = $renderer;
         $this->tag = $wrapperTag;
     }
 
@@ -77,12 +78,14 @@ class ReactJsExtension extends Twig_Extension
      *
      * @return string
      */
-    public function renderReactComponent($componentName, $containerId, $data = null)
+    public function renderReactComponent($componentName, $containerId, $data = [])
     {
-        $this->reactJS->setComponent($componentName, $data);
-        $this->componentsJs[$componentName] = $this->reactJS->getJS('document.getElementById(\''.$containerId.'\')');
+        $this->componentsJs[$componentName] = $this->renderer->getRenderJs(
+            $componentName,
+            sprintf('document.getElementById("%s")', $containerId)
+        );
 
-        return sprintf($this->getWrapper(), $containerId, $this->reactJS->getMarkup());
+        return sprintf($this->getWrapper(), $containerId, $this->renderer->render($componentName, $data));
     }
 
     /**
