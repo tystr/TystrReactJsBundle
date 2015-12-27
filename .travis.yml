@@ -9,8 +9,9 @@ before_script:
   - export PATH=`pwd`/depot_tools:"$PATH"
   - fetch v8
   - cd v8
+  - git checkout 4.9.99
   - gclient sync
-  - make native library=shared snapshot=off -j4
+  - make native library=shared snapshot=off -j8
   - sudo mkdir -p /usr/lib /usr/include
   - sudo cp out/native/lib.target/lib*.so /usr/lib/
   - sudo cp -R include/* /usr/include
