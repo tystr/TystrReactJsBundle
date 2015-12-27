@@ -22,7 +22,7 @@ before_script:
   - git clone https://github.com/preillyme/v8js.git
   - cd v8js
   - phpize
-  - ./configure
+  - ./configure --with-v8js=/usr
   - make
   - make test
   - sudo make install
