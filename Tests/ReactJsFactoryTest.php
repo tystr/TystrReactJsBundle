@@ -10,6 +10,13 @@ use Tystr\ReactJsBundle\ReactJsFactory;
  */
 class ReactJsFactoryTest extends PHPUnit_Framework_TestCase
 {
+    public function setUp()
+    {
+        if (!extension_loaded('v8js')) {
+            $this->markTestSkipped('Install the v8js extension (https://github.com/phpv8/v8js) to run this test.');
+        }
+    }
+
     public function testCreateJs()
     {
         $reactPath = __DIR__.'/react.min.js';
