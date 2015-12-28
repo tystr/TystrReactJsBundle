@@ -15,7 +15,7 @@ rendering via the [v8js PHP extension][2] for isomorphic app.
 
 Install `tystr/react-js-bundle` with composer:
 
-    # composer.phar require tystr/react-js-bundle:dev-master@dev
+    # composer.phar require tystr/react-js-bundle:dev-master:~0.1
     
 # Configuration
 
