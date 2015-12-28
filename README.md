@@ -4,7 +4,7 @@
 [![Test Coverage](https://codeclimate.com/github/tystr/TystrReactJsBundle/badges/coverage.svg)](https://codeclimate.com/github/tystr/TystrReactJsBundle/coverage)
 
 A bundle for integrating [React][0] into [Symfony][1]. Provides server-side
-rendering via the [v8js PHP extension][2] for isomorphic app.
+rendering via the [v8js PHP extension][2] for building isomorphic applications.
 
 [0]: https://facebook.github.io/react/index.html
 [1]: https://symfony.com
@@ -62,8 +62,8 @@ To pass data to a component, pass a hash as the third argument:
 ```
 This makes `this.props.name` available in `MyComponent`.
 
-To mount all components rendered with the `react_component` function, use the
-`react_mount_components` twig function:
+To mount all components rendered server-side with the `react_component`
+function, use the `react_mount_components` twig function:
 
 ```twig
 <script>
